@@ -1,0 +1,69 @@
+openapi: "3.0.0"
+
+info:
+  title: API Classes
+  version: "1.0"
+  description: E-learning API
+
+servers:
+  - url: http://localhost:8080/classes/api
+
+tags:
+  - name: Classes
+    description: Classes specific data.
+
+paths:
+  /classes:
+    get:
+      tags:
+        - Classes
+      summary: Get All Actifs Classes
+      operationId: getAllClasses
+      parameters:
+        - name: currentPage
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: sizePage
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            'application/json':
+              schema:
+                $ref: '../model/classes/ClassesResultListDTO.yml'
+        '404':
+          description: NOT FOUND
+        '400':
+          description: BAD REQUEST
+  /classes-reference:
+    get:
+      tags:
+        - Classes
+      summary: Retrieve an classe
+      operationId: getClasse
+      parameters:
+        - name: idClasse
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: SUCCESS
+          content:
+            'application/json':
+              schema:
+                $ref: '../model/classes/ClasseDTO.yml'
+        '404':
+          description: NOT FOUND
+        '400':
+          description: BAD REQUEST
